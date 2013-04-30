@@ -115,10 +115,10 @@ function! SetArrowKeysAsTextShifters()
   inoremap <silent> <C-Down> <Esc>:call AddEmptyLineBelow()<CR>a
 
   " exchange lines
-  "nnoremap  <s-up> :call <SID>swap_up()<CR>
-  "nnoremap  <s-down> :call <SID>swap_down()<CR>
-  "inoremap  <s-up> <esc>:call <SID>swap_up()<CR>a
-  "inoremap  <s-down> <esc>:call <SID>swap_down()<CR>a
+  nnoremap  <s-up> :call <SID>swap_up()<CR>
+  nnoremap  <s-down> :call <SID>swap_down()<CR>
+  inoremap  <s-up> <esc>:call <SID>swap_up()<CR>a
+  inoremap  <s-down> <esc>:call <SID>swap_down()<CR>a
   " disable modified versions we are not using
   "nnoremap  <s-left> <nop>
   "nnoremap  <s-right> <nop>
