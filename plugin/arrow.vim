@@ -129,6 +129,14 @@ function! SetArrowKeysAsTextShifters()
   "inoremap  <s-left> <nop>
   "inoremap  <s-right> <nop>
 endfunction
-call SetArrowKeysAsTextShifters()
+"call SetArrowKeysAsTextShifters()
 
+noremap <expr> <D-Left> (col('.') == 1 ? 'gT' : (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^'))
+noremap <expr> <D-Right> ((col('$') - col('.')) < 2 ? 'gt' : (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_'))
+
+noremap <expr> <Home> (col('.') == 1 ? 'gT' : (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^'))
+noremap <expr> <End> ((col('$') - col('.')) < 2 ? 'gt' : (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_'))
+vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
+imap <Home> <C-o><Home>
+imap <End> <C-o><End>
 " vim:set ft=vim et sw=2:
