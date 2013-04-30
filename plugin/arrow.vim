@@ -131,11 +131,22 @@ function! SetArrowKeysAsTextShifters()
 endfunction
 "call SetArrowKeysAsTextShifters()
 
-noremap <expr> <D-Left> (col('.') == 1 ? 'gT' : (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^'))
-noremap <expr> <D-Right> ((col('$') - col('.')) < 2 ? 'gt' : (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_'))
+if has("gui_running")
+  if has("gui_macvim")
+    no <D-M-Left> gT
+    no <D-M-Right> gt
+    imap <D-M-Left> <C-o><D-M-Left>
+    imap <D-M-Right> <C-o><D-M-Right>
+  endif
 
-noremap <expr> <Home> (col('.') == 1 ? 'gT' : (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^'))
-noremap <expr> <End> ((col('$') - col('.')) < 2 ? 'gt' : (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_'))
+  if exists("macvim_skip_cmd_opt_movement")
+    noremap <expr> <D-Left> (col('.') == 1 ? 'gT' : (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^'))
+    noremap <expr> <D-Right> ((col('$') - col('.')) < 2 ? 'gt' : (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_'))
+  endif
+endif
+
+noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
+noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
 vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home>
 imap <End> <C-o><End>
